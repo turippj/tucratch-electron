@@ -3,10 +3,6 @@
 const path = require('path');
 const fs = require('fs');
 const PodRepository = require('../repository/PodRepository');
-const LocalStorage = require('node-localstorage').LocalStorage;
-let localStorage = new LocalStorage('./scratch');
-
-
 
 module.exports = class JsonFactory {
   static makeJson(JSONPATH) {

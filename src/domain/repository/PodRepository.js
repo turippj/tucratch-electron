@@ -2,8 +2,7 @@
 
 const PodFactory = require('../factory/PodFactory');
 const fetch = require('node-fetch');
-const LocalStorage = require('node-localstorage').LocalStorage;
-let localStorage = new LocalStorage('./scratch');
+const storage = require('electron-json-storage-sync');
 
 module.exports = class PodRepository {
   static async setPod(id){
@@ -40,45 +39,49 @@ module.exports = class PodRepository {
   }
 
   static getPod(name) {
-    return JSON.parse(localStorage.getItem(name));
+    return storage.get(name).data;
   }
 
   static getPodsList() {
-    return JSON.parse(localStorage.getItem('podsList'));
+    return storage.get('podsList').data;
   }
 
   static getVarList() {
-    return JSON.parse(localStorage.getItem('varList'));
+    return storage.get('varList').data;
   }
 
   static setVarList(varList) {
-    localStorage.setItem('varList', JSON.stringify(varList));
+    storage.set('varList', varList);
+  }
+
+  static clearStorage() {
+    storage.clear();
   }
 
   static setToStrage(podData) {
     const name = podData['name']
-    localStorage.setItem(name +'_'+ podData['method'], JSON.stringify(PodFactory.addPod(podData)));
+    storage.set(name +'_'+ podData['method'], PodFactory.addPod(podData));
 
-    const getVarList = localStorage.getItem('varList');
+    const getVarList = storage.get('varList').data;
     if(podData['method'] == 'read') {
       if(getVarList){
-        let varList = JSON.parse(getVarList);
+        let varList = getVarList;
         varList[name] = 0;
-        localStorage.setItem('varList', JSON.stringify(varList));
+        storage.set('varList', varList);
       }else{
         const varList = {[name]: 0};
-        localStorage.setItem('varList', JSON.stringify(varList));
+        storage.set('varList', varList);
       }
     }
 
-    const getPodsList = localStorage.getItem('podsList');
+    const getPodsList = storage.get('podsList').data;
     if(getPodsList){
-      let podsList = JSON.parse(getPodsList);
+      let podsList = getPodsList;
       podsList.push(name +'_'+ podData['method']);
-      localStorage.setItem('podsList', JSON.stringify(podsList));
+      storage.set('podsList', podsList);
     }else{
       const podsList = [name +'_'+ podData['method']];
-      localStorage.setItem('podsList', JSON.stringify(podsList));
+      storage.set('podsList', podsList);
     }
   }
 

@@ -1,7 +1,6 @@
 const {app, ipcMain, BrowserWindow} = require('electron');
 const path = require('path');
 const url = require('url');
-const rmdir = require('rmdir');
 const ComWithPod = require('./domain/service/ComWithPod');
 const ComWithScratch = require('./domain/service/ComWithScratch');
 const PodRepository = require('./domain/repository/PodRepository');
@@ -10,6 +9,8 @@ let sp;
 let parser;
 let sended = {'message': ""};
 let mainWindow;
+
+global.appPath = app.getPath('exe');
 
 function createWindow () {
   mainWindow = new BrowserWindow({width: 450, height: 170, resizable: false});
@@ -20,10 +21,10 @@ function createWindow () {
     slashes: true
   }));
 
-  ComWithPod.getSerialList().then(function(data){
+  ComWithPod.getSerialList().then((data) => {
     setTimeout(function(){
       mainWindow.webContents.send( 'list', data );
-    }, 500);
+    }, 1000);
   });
 
   mainWindow.on('closed', function () {
@@ -34,7 +35,6 @@ function createWindow () {
 app.on('ready', createWindow);
 
 app.on('window-all-closed', function () {
-  rmdir('./scratch')
   if (process.platform !== 'darwin') {
     app.quit();
   }

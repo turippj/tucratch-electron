@@ -19,17 +19,22 @@
               </option>
             </select>
           </div>
-          <div class="siimple-grid-col siimple-grid-col--5">
-            <div v-if="selectedChecker == false">
-              <button v-on:click="select" class="siimple-btn siimple-btn--orange">Select</button>
-              <button v-on:click="refrash" class="siimple-btn siimple-btn--orange" >Refrash</button>
-            </div>
-            <div v-else>
-              <button class="siimple-btn siimple-btn--disabled">Select</button>
-              <button v-on:click="refrash" class="siimple-btn siimple-btn--orange" >Refrash</button>
+          <div v-if="options.length != 0">
+            <div class="siimple-grid-col siimple-grid-col--5">
+              <div v-if="selectedChecker == false">
+                <button v-on:click="select" class="siimple-btn siimple-btn--orange">Select</button>
+                <button v-on:click="refrash" class="siimple-btn siimple-btn--orange" >Refrash</button>
+              </div>
+              <div v-else>
+                <button class="siimple-btn siimple-btn--disabled">Select</button>
+                <button v-on:click="refrash" class="siimple-btn siimple-btn--orange" >Refrash</button>
+              </div>
             </div>
           </div>
-        </div>
+          <div v-else>
+            <button class="siimple-btn siimple-btn--disabled">Select</button>
+            <button class="siimple-btn siimple-btn--disabled">Refrash</button>
+          </div>
       </div>
     </div>
 

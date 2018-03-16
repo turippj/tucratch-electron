@@ -1,6 +1,7 @@
 const PodRepository = require('../repository/PodRepository');
 const JsonFactory = require('../factory/JsonFactory');
 const fsExtra = require('fs-extra');
+const path = require('path');
 const hasPost = new RegExp(/POST/);
 const hasGet = new RegExp(/GET/);
 
@@ -42,7 +43,7 @@ module.exports = class SerialResponseParser {
   }
 
   static async initPodList(gotMessage) {
-    fsExtra.emptyDirSync('../../../scratch');
+    PodRepository.clearStorage();
     const reply = JSON.parse(gotMessage);
     let pods = reply.bridge;
     let errMessage = [];
@@ -56,7 +57,7 @@ module.exports = class SerialResponseParser {
     }
 
     setTimeout(() => {
-      JsonFactory.makeJson('./json');
+      JsonFactory.makeJson(path.resolve(appPath, '..', '..', '..', '..'));
     }, 1000);
 
     if (errMessage != []) {
