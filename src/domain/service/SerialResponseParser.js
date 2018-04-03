@@ -2,8 +2,8 @@ const PodRepository = require('../repository/PodRepository');
 const JsonFactory = require('../factory/JsonFactory');
 const fsExtra = require('fs-extra');
 const path = require('path');
-const hasPost = new RegExp(/POST/);
-const hasGet = new RegExp(/GET/);
+const hasPost = new RegExp(/post/);
+const hasGet = new RegExp(/get/);
 
 module.exports = class SerialResponseParser {
   static responseParser(event, gotMessage, sendedMessage) {
@@ -71,18 +71,23 @@ module.exports = class SerialResponseParser {
   }
 
   static setResponseData(gotMessage) {
-    const reply = JSON.parse(gotMessage);
-    const podsList = PodRepository.getPodsList();
-    let varList = PodRepository.getVarList();
+    try {
+      const reply = JSON.parse(gotMessage);
+      const podsList = PodRepository.getPodsList();
+      let varList = PodRepository.getVarList();
 
-    podsList.forEach((pod) => {
-      if(pod.split('_')[1] == 'read') {
-        const gotPod = PodRepository.getPod(pod);
-        if(gotPod.id == reply.id && gotPod.port == reply.port) {
-          varList[pod.split('_')[0]] = reply.data;
-          PodRepository.setVarList(varList);
+      podsList.forEach((pod) => {
+        if(pod.split('_')[1] == 'read') {
+          const gotPod = PodRepository.getPod(pod);
+          if(gotPod.id == reply.id && gotPod.port == reply.port) {
+            varList[pod.split('_')[0]] = reply.data;
+            PodRepository.setVarList(varList);
+          }
         }
-      }
-    });
+      });
+    } catch (e){
+      console.log(e);
+    }
+
   }
 }

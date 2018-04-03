@@ -1,7 +1,7 @@
 const serialPort = require('serialport');
 const Readline = serialPort.parsers.Readline;
 const SerialResponseParser = require('./SerialResponseParser');
-
+const re2 = new RegExp("/");
 const re = new RegExp(/^Arduino/);
 
 module.exports = class ComWithPod {
@@ -21,6 +21,7 @@ module.exports = class ComWithPod {
   }
 
   static initialize(comName) {
+    console.log(comName);
     const sp = new serialPort(comName, { bandrate: 9600,
                                          dataBits: 8,
                                          parity: 'none',
@@ -32,7 +33,7 @@ module.exports = class ComWithPod {
   }
 
   static communicate(message, sp) {
-    sp.write(message);
+    sp.write(message.slice(message.search(re2)-1));
     return message;
   }
 

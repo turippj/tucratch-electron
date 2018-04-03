@@ -14,13 +14,13 @@ module.exports = class ComWithScratch {
 
   static podRead(pod, sp) {
     const getPod = PodRepository.getPod(pod);
-    const message = "GET " + "/" + getPod.id + "/" + getPod.port + "\n";
+    const message = "get " + "/" + getPod.id + "/" + getPod.port + "\n";
     return ComWithPod.communicate(message, sp);
   }
 
   static podWrite(pod, data, sp) {
     const getPod = PodRepository.getPod(pod);
-    const message = "POST " + "/" + getPod.id + "/" + getPod.port + " " + data + "\n";
+    const message = "post " + "/" + getPod.id + "/" + getPod.port + " " + data + "\n";
     return ComWithPod.communicate(message, sp);
   }
 }

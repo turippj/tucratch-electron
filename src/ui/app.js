@@ -82,7 +82,6 @@ scratch.use('/', router);
 
 router.get('/poll', (req, res) => {
   res.send(ipcRenderer.sendSync('poll', 'polling'));
-  num++;
 });
 
 router.get('/:pod/:id/:data', (req, res) => {
