@@ -1,7 +1,9 @@
+'use strict'
+
 const PodRepository = require('../repository/PodRepository');
 const JsonFactory = require('../factory/JsonFactory');
-const fsExtra = require('fs-extra');
 const path = require('path');
+const i18n = require('i18next');
 const hasPost = new RegExp(/post/);
 const hasGet = new RegExp(/get/);
 
@@ -57,7 +59,7 @@ module.exports = class SerialResponseParser {
     }
 
     setTimeout(() => {
-      JsonFactory.makeJson(path.resolve(appPath, '..', '..', '..', '..'));
+      JsonFactory.makeJson(path.resolve('./json'));
     }, 1000);
 
     if (errMessage != []) {
@@ -77,7 +79,7 @@ module.exports = class SerialResponseParser {
       let varList = PodRepository.getVarList();
 
       podsList.forEach((pod) => {
-        if(pod.split('_')[1] == 'read') {
+        if(pod.split('_')[1] == i18n.t('read')) {
           const gotPod = PodRepository.getPod(pod);
           if(gotPod.id == reply.id && gotPod.port == reply.port) {
             varList[pod.split('_')[0]] = reply.data;
