@@ -5,51 +5,49 @@
 </head>
 <body>
   <link rel="stylesheet" href="../../node_modules/siimple/dist/siimple.css">
-
-  <div class="siimple-grid">
-    <div class="siimple-grid-col siimple-grid-col--12">
-      <p><div class="siimple-h6">Select SerialPort</div></p>
-    </div>
-    <div class="siimple-grid-row">
-        <div id="selectMenu">
-          <div class="siimple-grid-col siimple-grid-col--7">
-            <select class="siimple-select" v-model="selected">
-              <option v-for="option in options" v-bind:value="option.value">
-                {{ option.text }}
-              </option>
-            </select>
-          </div>
-          <div v-if="options.length != 0">
-            <div class="siimple-grid-col siimple-grid-col--5">
-              <div v-if="selectedChecker == false">
-                <button v-on:click="select" class="siimple-btn siimple-btn--orange">Select</button>
-                <button v-on:click="refrash" class="siimple-btn siimple-btn--orange" >Refrash</button>
-              </div>
-              <div v-else>
-                <button class="siimple-btn siimple-btn--disabled">Select</button>
-                <button v-on:click="refrash" class="siimple-btn siimple-btn--orange" >Refrash</button>
-              </div>
+  <div id="selectMenu">
+    <div class="siimple-grid">
+        <div class="siimple-grid-col siimple-grid-col--12">
+            <p><div class="siimple-h6">{{ i18ns.main }}</div></p>
+        </div>
+        <div class="siimple-grid-row">
+            <div class="siimple-grid-col siimple-grid-col--8">
+                <select class="siimple-select" v-model="selected">
+                    <option v-for="option in options" v-bind:value="option.value">
+                        {{ option.text }}
+                    </option>
+                </select>
             </div>
-          </div>
-          <div v-else>
-            <button class="siimple-btn siimple-btn--disabled">Select</button>
-            <button class="siimple-btn siimple-btn--disabled">Refrash</button>
-          </div>
-      </div>
+            <div v-if="options.length != 0">
+                <div class="siimple-grid-col siimple-grid-col--5">
+                    <div v-if="selectedChecker == false">
+                        <button v-on:click="select" class="siimple-btn siimple-btn--orange">{{ i18ns.select }}</button>
+                        <button v-on:click="refrash" class="siimple-btn siimple-btn--orange" >{{ i18ns.refrash }}</button>
+                    </div>
+                    <div v-else>
+                        <button class="siimple-btn siimple-btn--disabled">{{ i18ns.select }}</button>
+                        <button v-on:click="refrash" class="siimple-btn siimple-btn--orange" >{{ i18ns.refrash }}</button>
+                    </div>
+                </div>
+            </div>
+            <div v-else>
+                <button class="siimple-btn siimple-btn--disabled">{{ i18ns.select }}</button>
+                <button class="siimple-btn siimple-btn--disabled">{{ i18ns.refrash }}</button>
+            </div>
+        </div>
     </div>
-
-    <div class="siimple-grid-row">
-        <div id="connectionStatus">
+  </div>
+  <div class="siimple-grid-row">
+      <div id="connectionStatus">
           <div class="siimple-content--medium">
               <div v-for="message in messages" v-bind:value="message.value">
-                <div v-if="message == 'Connect Success!'"><p> {{ message }} </p></div>
-                <div v-else-if="message == 'Refresh Success!'"><p> {{ message }} </p></div>
-                <div v-else> <p style="color: red"> {{ message }} </p></div>
+                  <div v-if="message == 'Connect Success!'"><p> {{ message }} </p></div>
+                  <div v-else-if="message == 'Refresh Success!'"><p> {{ message }} </p></div>
+                  <div v-else> <p style="color: red"> {{ message }} </p></div>
               </div>
           </div>
         </div>
       </div>
-    </div>
   </div>
 
   <script src="renderer.js"></script>

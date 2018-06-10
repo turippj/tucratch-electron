@@ -1,0 +1,28 @@
+{
+  "model":"1001",
+  "name":"LED",
+  "description":"TURIP pot full color LED module.",
+  "port":[
+    {
+      "number":1,
+      "name":"あか",
+      "description":"Output of LED Red (0-255).",
+      "permission":"RW",
+      "type":"int16"
+    },
+    {
+      "number":2,
+      "name":"みどり",
+      "description":"Output of LED Green (0-255).",
+      "permission":"RW",
+      "type":"int16"
+    },
+    {
+      "number":3,
+      "name":"あお",
+      "description":"Output of LED Blue (0-255).",
+      "permission":"RW",
+      "type":"int16"
+    }
+  ]
+}

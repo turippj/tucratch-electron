@@ -1,0 +1,49 @@
+{
+  "model":"1007",
+  "name":"つまみ",
+  "description":"TURIP pot encoder I/F module.",
+  "port":[
+    {
+      "number":1,
+      "name":"かいてんすう",
+      "description":"Output of encoder value.",
+      "permission":"RW",
+      "type":"int16"
+    },
+    {
+      "number":2,
+      "name":"ボタン",
+      "description":"Output of button state.",
+      "permission":"RO",
+      "type":"bool"
+    },
+    {
+      "number":3,
+      "name":"ラッチボタン",
+      "description":"Output of button latch state.",
+      "permission":"RO",
+      "type":"bool"
+    },
+    {
+      "number":4,
+      "name":"LEDあか",
+      "description":"Output of LED Red (0-255).",
+      "permission":"RW",
+      "type":"int16"
+    },
+    {
+      "number":5,
+      "name":"LEDみどり",
+      "description":"Output of LED Green (0-255).",
+      "permission":"RW",
+      "type":"int16"
+    },
+    {
+      "number":6,
+      "name":"LEDあお",
+      "description":"Output of LED Green (0-255).",
+      "permission":"RW",
+      "type":"int16"
+    }
+  ]
+}

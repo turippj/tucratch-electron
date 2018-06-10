@@ -2,6 +2,7 @@
 
 const path = require('path');
 const fs = require('fs');
+const i18n = require('i18next');
 const PodRepository = require('../repository/PodRepository');
 
 module.exports = class JsonFactory {
@@ -18,10 +19,10 @@ module.exports = class JsonFactory {
       for(let pod of podsList) {
         const podData = PodRepository.getPod(pod);
         if(podData){
-          if(podData['method'] == 'read'){
+          if(podData['method'] == i18n.t('read')){
             json['blockSpecs'].push(['w', pod, pod]);
             json['blockSpecs'].push(['r', podData['name'], podData['name']]);
-          }else if(podData['method'] == 'write'){
+          }else if(podData['method'] == i18n.t('write')){
             json['blockSpecs'].push(['w', pod + " %n", pod]);
           }
         }

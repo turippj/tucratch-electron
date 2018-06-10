@@ -39,9 +39,7 @@ module.exports = class ComWithPod {
 
   static getTpodList(sp) {
     const message = "/\n";
-    setTimeout(function(){
-      sp.write(message);
-    }, 2000);
+    sp.write(message);
     return message;
   }
 
