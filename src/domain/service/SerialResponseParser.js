@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const PodRepository = require('../repository/PodRepository');
 const JsonFactory = require('../factory/JsonFactory');
@@ -59,7 +59,7 @@ module.exports = class SerialResponseParser {
     }
 
     setTimeout(() => {
-      JsonFactory.makeJson(path.resolve('./json'));
+      JsonFactory.makeJson();
     }, 1000);
 
     if (errMessage != []) {

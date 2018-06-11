@@ -1,14 +1,14 @@
-'use strict'
+'use strict';
 
-const path = require('path');
+const {app} = require('electron');
 const fs = require('fs');
 const i18n = require('i18next');
 const PodRepository = require('../repository/PodRepository');
-
+const appPath = app.getPath('home');
 module.exports = class JsonFactory {
-  static makeJson(JSONPATH) {
+  static makeJson() {
     //Check tucratch.json not existing
-    if(this.isExistFile(JSONPATH + '/tucratch.json')) fs.unlinkSync(JSONPATH + '/tucratch.json');
+    if(this.isExistFile(appPath + '/Documents/tucratch/tucratch.json')) fs.unlinkSync(appPath + '/Documents/tucratch/tucratch.json');
 
     let json = { "extensionName": "tucratch",
                  "extensionPort": 5000,
@@ -30,7 +30,7 @@ module.exports = class JsonFactory {
     }else{
       return false;
     }
-    fs.writeFile(JSONPATH + '/tucratch.json', JSON.stringify(json, null, '    '));
+    fs.writeFile(appPath + '/Documents/tucratch/tucratch.json', JSON.stringify(json, null, '    '));
     return true;
   }
 
@@ -42,4 +42,4 @@ module.exports = class JsonFactory {
       if(err.code === 'ENOENT') return false
     }
   }
-}
+};

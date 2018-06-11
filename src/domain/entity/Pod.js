@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 module.exports = class Pod {
   constructor(name, type, port, id, method){
@@ -8,4 +8,4 @@ module.exports = class Pod {
     this.id = id;
     this.method = method;
   }
-}
+};

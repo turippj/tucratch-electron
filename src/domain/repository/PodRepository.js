@@ -1,13 +1,13 @@
-'use strict'
+'use strict';
 
 const PodFactory = require('../factory/PodFactory');
+const JaManifest = require('../service/JaManifest');
 const fetch = require('node-fetch');
 const storage = require('electron-json-storage-sync');
-const path = require('path');
-const fs = require('fs');
 const i18n = require('i18next');
 const _ = require('underscore');
-const manifest_ja = JSON.parse(fs.readFileSync(path.resolve('ja', 'manifestList.json'), 'utf8'));
+
+const manifest_ja = new JaManifest();
 
 module.exports = class PodRepository {
   static async setPod(id){
@@ -15,8 +15,8 @@ module.exports = class PodRepository {
     const URL = 'https://manifest.turip.org/';
     let json;
 
-    if( i18n.language == 'ja' && _.find(manifest_ja["list"], (num) => { return manifest_id == num; })) {
-        json = JSON.parse(fs.readFileSync(path.resolve('ja', manifest_id+'.json'), 'utf8'));
+    if( i18n.language == 'ja' && _.find(manifest_ja.getManifestList(), (num) => { return manifest_id == num; })) {
+        json = manifest_ja.getManifests(manifest_id);
     } else {
         json =  await fetch(URL + manifest_id).then((response) => {
             return response.json();
@@ -101,4 +101,4 @@ module.exports = class PodRepository {
     console.log(err);
   }
 
-}
+};

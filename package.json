@@ -1,6 +1,6 @@
 {
   "name": "tucratch",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The TURIP-Scratch connection helper",
   "main": "./src/index.js",
   "scripts": {
@@ -18,7 +18,7 @@
   "license": "MIT",
   "dependencies": {
     "co": "^4.6.0",
-    "electron": "^1.8.6",
+    "electron": "1.7.9",
     "electron-json-storage-sync": "^1.1.0",
     "electron-packager": "^11.1.0",
     "fs": "0.0.1-security",
@@ -29,6 +29,7 @@
     "node-localstorage": "^1.3.1",
     "serialport": "^6.2.0",
     "siimple": "^3.0.0",
+    "underscore": "^1.9.1",
     "vue": "^2.5.16",
     "webpack": "^4.8.1"
   },

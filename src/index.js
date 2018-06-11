@@ -11,8 +11,6 @@ let parser;
 let sended = {'message': ""};
 let mainWindow;
 
-global.appPath = app.getPath('exe');
-
 i18n.init({
     lng: 'ja',
     debug: true,
@@ -33,7 +31,6 @@ i18n.init({
 }, (err, t) => {
     if (err) return console.log('something went wrong loading', err);
 });
-
 
 function createWindow () {
   mainWindow = new BrowserWindow({width: 400, height: 195, resizable: true});
@@ -79,26 +76,6 @@ function createWindow () {
                       mainWindow.webContents.send( 'lang', 'en' );
                   }
               }
-          ]
-      },
-      {
-          label: 'View',
-          submenu: [
-              {
-                  label: 'Reload',
-                  accelerator: 'Command+R',
-                  click: function() { mainWindow.restart(); }
-              },
-              {
-                  label: 'Toggle Full Screen',
-                  accelerator: 'Ctrl+Command+F',
-                  click: function() { mainWindow.setFullScreen(!mainWindow.isFullScreen()); }
-              },
-              {
-                  label: 'Toggle Developer Tools',
-                  accelerator: 'Alt+Command+I',
-                  click: function() { mainWindow.toggleDevTools(); }
-              },
           ]
       }
   ]);

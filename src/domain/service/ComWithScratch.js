@@ -1,3 +1,5 @@
+'use strict';
+
 const ComWithPod = require('./ComWithPod');
 const PodRepository = require('../repository/PodRepository');
 
@@ -23,4 +25,4 @@ module.exports = class ComWithScratch {
     const message = "post " + "/" + getPod.id + "/" + getPod.port + " " + data + "\n";
     return ComWithPod.communicate(message, sp);
   }
-}
+};

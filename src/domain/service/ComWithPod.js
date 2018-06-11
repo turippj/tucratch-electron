@@ -1,3 +1,5 @@
+'use strict';
+
 const serialPort = require('serialport');
 const Readline = serialPort.parsers.Readline;
 const SerialResponseParser = require('./SerialResponseParser');
@@ -48,4 +50,4 @@ module.exports = class ComWithPod {
       SerialResponseParser.responseParser(event, res, sended.message);
     });
   }
-}
+};
